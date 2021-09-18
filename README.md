@@ -1,3 +1,3 @@
-# laravel-docker-base
+# laravel-firebase
 
-自分用開発docker環境
+firebase認証機能をlaravelで使用

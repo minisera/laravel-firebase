@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1', 'as' => 'api.'], function () {
     Route::post('create', 'CreateController')->name('create');
+    Route::post('signin', 'SignInController')->name('signin');
 });
 
-// Route::post('v1/create', 'Api\v1\CreateController')->name('api.create');

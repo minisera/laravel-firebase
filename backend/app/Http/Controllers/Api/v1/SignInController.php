@@ -6,6 +6,7 @@ use Firebase\Auth\Token\Exception\InvalidToken;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Auth;
+use App\Models\User;
 
 class SignInController extends Controller
 {
@@ -48,9 +49,14 @@ class SignInController extends Controller
 
         // ユーザーの固有ID uid を取得する
         $uid = $verifiedIdToken->claims()->get('sub');
-
         // uidをもとにユーザー情報を取得する
-        $user = $this->auth->getUser($uid);
+        $firebaseUser = $this->auth->getUser($uid);
+        
+        //DBにユーザーを保存する
+        $user = User::firstOrCreate(
+            ['firebase_uid' => $uid],
+            ['name' => $firebaseUser->displayName]
+        );
 
         return response()->json([
             'user' => $user

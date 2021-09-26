@@ -16,7 +16,7 @@ class CreateUsersTables extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('firebase_uid',255)->unique();
-            $table->string('name',255);
+            $table->string('name',255)->nullable();
             $table->timestamps();
         });
     }
